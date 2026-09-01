@@ -321,17 +321,25 @@ module.exports = grammar({
 			$.kUnit, $.moduleName, ';',
 			repeat(choice(
 				$.interface,
-				$.implementation,
-				$.initialization,
-				$.finalization,
+        $.implementation,
 			)),
+
+      choice(
+				seq(
+					optional($.initialization),
+					optional($.finalization),
+				),
+				alias($.initializationBlock, $.initialization),
+			),
+        
 			$.kEnd, $.kEndDot
 		),
 
 		interface:       $ => seq($.kInterface, optional($._declarations)),
 		implementation:  $ => seq($.kImplementation, optional($._definitions)),
 		initialization:  $ => seq($.kInitialization, optional(tr($,'_statements'))),
-		finalization:    $ => seq($.kFinalization, optional(tr($,'_statements'))),
+    finalization: $ => seq($.kFinalization, optional(tr($, '_statements'))),
+		initializationBlock: $ => seq($.kBegin, optional(tr($,'_statements'))),
 
 		moduleName:      $ => delimited1($.identifier, $.kDot),
 
@@ -556,8 +564,7 @@ module.exports = grammar({
 		_definition:     $ => choice(
 			$.declTypes, $.declVars, $.declConsts, $.defProc,
 			alias($.declProcFwd, $.declProc),
-			$.declLabels, $.declUses, $.declExports,
-			prec(-1,tr($,'block'))
+			$.declLabels, $.declUses, $.declExports
 		),
 
 		defProc:         $ => seq(
