@@ -659,6 +659,10 @@
             "named": true
           },
           {
+            "type": "pp",
+            "named": true
+          },
+          {
             "type": "raise",
             "named": true
           },
@@ -1247,6 +1251,10 @@
         },
         {
           "type": "kResourcestring",
+          "named": true
+        },
+        {
+          "type": "pp",
           "named": true
         }
       ]
