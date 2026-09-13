@@ -198,7 +198,7 @@ function statements(trailing) {
 
 		[rn('caseCase'),    $ => seq(
 			field('label', $.caseLabel),
-			field('body', lastStatement($))
+			field('body', pp($,lastStatement($)))
 		)],
 
 		[rn('case'),        $ => prec(2,seq(
@@ -607,11 +607,11 @@ module.exports = grammar({
 			repeat($.declVar)
 		),
 
-		declConsts:      $ => seq(
+		declConsts:      $ => pp($, seq(
 			optional($.kClass),
 			choice($.kConst, $.kResourcestring),
 			repeat($.declConst),
-		),
+		)),
 
 		declType:        $ => seq(
 			...enable_if(rtti, optional($.rttiAttributes)),
