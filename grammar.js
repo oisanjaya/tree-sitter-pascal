@@ -240,7 +240,7 @@ function statements(trailing) {
 			seq($._expr, ...semicolon),
 		)],
 
-		[rn('goto'),        $ => seq($.kGoto, $.identifier, ...semicolon)],
+		[rn('goto'),        $ => seq($.kGoto, $._labelId, ...semicolon)],
 
 		[rn('_statement'),   $ => choice(
 			...semicolon,
@@ -282,7 +282,9 @@ module.exports = grammar({
 			[ $.declProcFwd ], [ $.declVars], [ $.declConsts ], [ $.declTypes]
 		),
 		[$.exprTpl, $.exprBinary],
-		[$._ref, $.inlineConst],
+    [$._ref, $.inlineConst],
+    [$._ref, $.declEnumValue],
+		[$._ref, $._typeref],
 		...enable_if(delphi || fpc,
 			[$._statement, $._statementTr]
 		),
@@ -363,7 +365,7 @@ module.exports = grammar({
 			field('defaultValue', $.defaultValue),
 			';'
 		),
-		label:           $ => seq($.identifier, ':'),
+		label:           $ => prec.dynamic(2, seq($._labelId, ':')),
 		caseLabel:       $ => seq(delimited1(choice($._expr, $.range)), ':'),
 
 		_statements:     $ => repeat1(choice($.varDef, $._statement,  $.label)),
@@ -484,7 +486,8 @@ module.exports = grammar({
 			$.declArray,
 			$.declFile,
 			$.declString,
-			$.declProcRef,
+      $.declProcRef,
+			$.declSubRange,
 		)),
 
 		typeref:         $ => seq(
@@ -657,14 +660,21 @@ module.exports = grammar({
 			repeat($._procAttribute)
 		),
 
+		labelNumber: $ => token(prec(1, /[0-9]+/)),
+		_labelId: $ => choice($.identifier, $.labelNumber),
 		declLabels:      $ => seq($.kLabel, delimited1($.declLabel), ';'),
-		declLabel:       $ => field('name', $.identifier),
+		declLabel:       $ => field('name', $._labelId),
 
 		declExport:      $ => seq($._genericName, repeat(seq(choice($.kName, $.kIndex), $._expr))),
 
 		declEnum:        $ => seq('(', delimited1($.declEnumValue), ')'),
 		declEnumValue:   $ => seq(field('name', $.identifier), field('value', optional($.defaultValue))),
-		declSet:         $ => seq($.kSet, $.kOf, $.type),
+    declSet: $ => seq($.kSet, $.kOf, $.type),
+    declSubRange: $ => seq(
+    	field('low', $._expr),
+    	'..',
+    	field('high', $._expr)
+    ),
 		declArray:       $ => seq(
 			optional($.kPacked),
 			$.kArray,

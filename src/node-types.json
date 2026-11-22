@@ -1693,6 +1693,10 @@
           {
             "type": "identifier",
             "named": true
+          },
+          {
+            "type": "labelNumber",
+            "named": true
           }
         ]
       }
@@ -2652,6 +2656,176 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "declSubRange",
+    "named": true,
+    "fields": {
+      "high": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "exprBinary",
+            "named": true
+          },
+          {
+            "type": "exprBrackets",
+            "named": true
+          },
+          {
+            "type": "exprCall",
+            "named": true
+          },
+          {
+            "type": "exprDot",
+            "named": true
+          },
+          {
+            "type": "exprIf",
+            "named": true
+          },
+          {
+            "type": "exprParens",
+            "named": true
+          },
+          {
+            "type": "exprSubscript",
+            "named": true
+          },
+          {
+            "type": "exprTpl",
+            "named": true
+          },
+          {
+            "type": "exprUnary",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "inherited",
+            "named": true
+          },
+          {
+            "type": "kFalse",
+            "named": true
+          },
+          {
+            "type": "kNil",
+            "named": true
+          },
+          {
+            "type": "kSpecialize",
+            "named": true
+          },
+          {
+            "type": "kTrue",
+            "named": true
+          },
+          {
+            "type": "lambda",
+            "named": true
+          },
+          {
+            "type": "literalNumber",
+            "named": true
+          },
+          {
+            "type": "literalString",
+            "named": true
+          },
+          {
+            "type": "literalStringMultiline",
+            "named": true
+          }
+        ]
+      },
+      "low": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "exprBinary",
+            "named": true
+          },
+          {
+            "type": "exprBrackets",
+            "named": true
+          },
+          {
+            "type": "exprCall",
+            "named": true
+          },
+          {
+            "type": "exprDot",
+            "named": true
+          },
+          {
+            "type": "exprIf",
+            "named": true
+          },
+          {
+            "type": "exprParens",
+            "named": true
+          },
+          {
+            "type": "exprSubscript",
+            "named": true
+          },
+          {
+            "type": "exprTpl",
+            "named": true
+          },
+          {
+            "type": "exprUnary",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "inherited",
+            "named": true
+          },
+          {
+            "type": "kFalse",
+            "named": true
+          },
+          {
+            "type": "kNil",
+            "named": true
+          },
+          {
+            "type": "kSpecialize",
+            "named": true
+          },
+          {
+            "type": "kTrue",
+            "named": true
+          },
+          {
+            "type": "lambda",
+            "named": true
+          },
+          {
+            "type": "literalNumber",
+            "named": true
+          },
+          {
+            "type": "literalString",
+            "named": true
+          },
+          {
+            "type": "literalStringMultiline",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -5596,6 +5770,10 @@
         {
           "type": "kGoto",
           "named": true
+        },
+        {
+          "type": "labelNumber",
+          "named": true
         }
       ]
     }
@@ -6391,6 +6569,10 @@
       "types": [
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "labelNumber",
           "named": true
         }
       ]
@@ -8151,6 +8333,10 @@
           "named": true
         },
         {
+          "type": "declSubRange",
+          "named": true
+        },
+        {
           "type": "pp",
           "named": true
         },
@@ -9598,6 +9784,10 @@
   },
   {
     "type": "kXor",
+    "named": true
+  },
+  {
+    "type": "labelNumber",
     "named": true
   },
   {
